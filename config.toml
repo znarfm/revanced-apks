@@ -46,7 +46,7 @@ integrations-source = "anddea/revanced-integrations"
 uptodown-dlurl = "https://spotify.en.uptodown.com/android"
 archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.spotify.music"
 
-[Reddit]
+[Reddit-anddea]
 app-name = "Reddit"
 version = "2025.12.1"
 apkmirror-dpi = "120-640dpi"

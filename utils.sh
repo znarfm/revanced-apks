@@ -388,7 +388,7 @@ dl_uptodown() {
 			continue
 		fi
 		if [ "$(jq -e -r ".kindFile" <<<"$op")" = "xapk" ]; then is_bundle=true; fi
-		if versionURL=$(jq -e -r '.versionURL.url' <<<"$op"); then break; else return 1; fi
+		if versionURL=$(jq -e -r '.versionURL' <<<"$op"); then break; else return 1; fi
 	done
 	if [ -z "$versionURL" ]; then return 1; fi
 	resp=$(req "$versionURL" -) || return 1

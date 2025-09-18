@@ -382,7 +382,7 @@ dl_uptodown() {
 	data_code=$($HTMLQ "#detail-app-name" --attribute data-code <<<"$__UPTODOWN_RESP__")
 	local versionURL=""
 	local is_bundle=false
-	for i in {1..5}; do
+	for i in {1..10}; do
 		resp=$(req "${uptodown_dlurl}/apps/${data_code}/versions/${i}" -)
 		if ! op=$(jq -e -r ".data | map(select(.version == \"${version}\")) | .[0]" <<<"$resp"); then
 			continue
@@ -391,7 +391,15 @@ dl_uptodown() {
 		if versionURL=$(jq -e -r '.versionURL' <<<"$op"); then break; else return 1; fi
 	done
 	if [ -z "$versionURL" ]; then return 1; fi
-	resp=$(req "$versionURL" -) || return 1
+	
+	local base_url extra_url version_id
+	base_url=$(jq -e -r '.url' <<<"$versionURL")
+	extra_url=$(jq -e -r '.extraURL' <<<"$versionURL")
+	version_id=$(jq -e -r '.versionID' <<<"$versionURL")
+	
+	local full_url="${base_url}/${extra_url}/${version_id}"
+	
+	resp=$(req "$full_url" -) || return 1
 
 	local data_version files node_arch data_file_id
 	data_version=$($HTMLQ '.button.variants' --attribute data-version <<<"$resp") || return 1

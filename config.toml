@@ -20,7 +20,7 @@ integrations-source = "anddea/revanced-integrations"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
 uptodown-dlurl = "https://youtube.en.uptodown.com/android"
 archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.youtube"
-patcher-args = "-e 'Theme' -OdarkThemeBackgroundColor=#000000"
+patcher-args = "-e 'Theme' -OdarkThemeBackgroundColor=#000000 -e 'Hide Shorts components' -OhideShortsAppShortcut=true -OhideShortsWidget=true"
 
 [Music-anddea]
 app-name = "YT Music"

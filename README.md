@@ -37,7 +37,7 @@ The easiest way to get started is to download the latest builds directly from th
 #### ReVanced APKs
 
 Download and install APKs from the [Latest CI Release](https://github.com/znarfm/revanced-apks/releases) or...
-Easily add APKs from this repository to your Obtainium app to get automatic updates:
+Easily add APKs from this repository to your [Obtainium](https://obtainium.imranr.dev/) app to get automatic updates:
 
 | App | Add to Obtainium |
 | --- | ---------------- |

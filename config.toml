@@ -79,3 +79,11 @@ arch = "arm64-v8a"
 build-mode = "apk"
 # apkmirror-dlurl = "https://www.apkmirror.com/apk/facebook-2/facebook/"
 uptodown-dlurl = "https://facebook.en.uptodown.com/android"
+
+[Lightroom]
+apkmirror-dlurl = "https://www.apkmirror.com/apk/adobe/lightroom/"
+arch = "arm64-v8a"
+
+[Strava]
+apkmirror-dlurl = "https://www.apkmirror.com/apk/strava-inc/"
+arch = "arm64-v8a"

@@ -7,6 +7,9 @@ apkmirror-dlurl = "https://www.apkmirror.com/apk/inc/app"
 # or uptodown-dlurl = "https://app.en.uptodown.com/android"
 ```
 
+> [!WARNING]
+> When a patch name itself contains a single quote, double it inside the string (e.g. 'Hide ''Get Music Premium''').
+
 ## More about other options:
 
 There exists an example below with all defaults shown and all the keys explicitly set.  
@@ -53,7 +56,7 @@ exclusive-patches = false                                  # exclude all patches
 apkmirror-dlurl = "https://www.apkmirror.com/apk/inc/app"
 uptodown-dlurl = "https://spotify.en.uptodown.com/android"
 module-prop-name = "some-app-magisk"                       # magisk module prop name.
-apkmirror-dpi = "360-480dpi"                               # used to select apk variant from apkmirror. default: nodpi
+dpi = "360-480dpi"                                         # used to select apk variant from apkmirror. default: nodpi
 arch = "arm64-v8a"                                         # 'arm64-v8a', 'arm-v7a', 'all', 'both'. 'both' downloads both arm64-v8a and arm-v7a. default: all
 riplib = true                                              # enables ripping x86 and x86_64 libs from apks with j-hc revanced cli. default: true
 

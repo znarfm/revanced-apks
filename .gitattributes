@@ -1,0 +1,5 @@
+# Keep my local README.md during merges
+README.md merge=ours
+
+# Keep my config file during merges
+config.toml merge=ours

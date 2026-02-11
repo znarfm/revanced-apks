@@ -35,6 +35,26 @@ archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.a
 excluded-patches = "'Translations for YouTube Music'"
 patcher-args = "-e 'Dark theme' -OdarkThemeBackgroundColor=#000000"
 
+[YouTube-Morphe]
+app-name = "YouTube"
+rv-brand = "Morphe"
+# version = "auto"
+arch = "arm64-v8a"
+cli-source = "MorpheApp/morphe-cli"
+patches-source = "MorpheApp/morphe-patches"
+apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
+uptodown-dlurl = "https://youtube.en.uptodown.com/android"
+
+[YTMusic-Morphe]
+app-name = "YT Music"
+rv-brand = "Morphe"
+# version = "8.25.54"
+arch = "arm64-v8a"
+cli-source = "MorpheApp/morphe-cli"
+patches-source = "MorpheApp/morphe-patches"
+apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
+uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
+
 [Spotify]
 app-name = "Spotify"
 # version = "auto"

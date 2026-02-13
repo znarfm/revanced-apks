@@ -1,4 +1,7 @@
 GooglePhotos: 7.61.0.860908034  
+Facebook: 490.0.0.63.82  
+Messenger: 548.0.0.37.65  
+Strava: 450.9  
 YouTube-Morphe: 20.40.45  
 Reddit-morphe: 2026.03.0  
 

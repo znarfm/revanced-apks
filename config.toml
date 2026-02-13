@@ -61,20 +61,31 @@ uptodown-dlurl = "https://youtube.en.uptodown.com/android"
 # uptodown-dlurl = "https://spotify.en.uptodown.com/android"
 # archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.spotify.music"
 
-[Reddit-anddea]
+# [Reddit-anddea]
+# app-name = "Reddit"
+# version = "2025.12.1"
+# apkmirror-dpi = "120-640dpi"
+# # arch = "arm64-v8a"
+# rv-brand = "anddea"
+# patches-source = "anddea/revanced-patches"
+# apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
+# uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
+
+[Reddit-morphe]
 app-name = "Reddit"
-version = "2025.12.1"
-apkmirror-dpi = "120-640dpi"
-# arch = "arm64-v8a"
-rv-brand = "anddea"
+# version = "2025.12.1"
+apkmirror-dpi = "nodpi anydpi 120-640dpi"
+arch = "arm64-v8a"
+rv-brand = "Morphe"
+cli-source = "MorpheApp/morphe-cli"
+cli-version = "dev"
+patches-source = "MorpheApp/morphe-patches"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
 uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
-patches-source = "anddea/revanced-patches"
 
 [GooglePhotos]
 app-name = "GPhotos"
 arch = "arm64-v8a"
-version = "auto"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/photos/"
 uptodown-dlurl = "https://google-photos.en.uptodown.com/android"
 archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.apps.photos"

@@ -8,9 +8,38 @@ enable-magisk-update = false # set this to false if you do not want to receive u
 
 # you can use rvmm-config-gen to generate a config
 
-# I only build arm64-v8a apks
+# Morphe
+[YouTube-Morphe]
+app-name = "YouTube"
+rv-brand = "Morphe"
+arch = "arm64-v8a"
+cli-source = "MorpheApp/morphe-cli"
+patches-source = "MorpheApp/morphe-patches"
+apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
+uptodown-dlurl = "https://youtube.en.uptodown.com/android"
+archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.youtube"
 
-# shift to morphe for now
+[YTMusic-Morphe]
+app-name = "YT Music"
+rv-brand = "Morphe"
+arch = "arm64-v8a"
+cli-source = "MorpheApp/morphe-cli"
+patches-source = "MorpheApp/morphe-patches"
+apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
+uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
+archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.apps.youtube.music"
+
+[Reddit-Morphe]
+app-name = "Reddit"
+apkmirror-dpi = "nodpi anydpi 120-640dpi"
+arch = "arm64-v8a"
+rv-brand = "Morphe"
+cli-source = "MorpheApp/morphe-cli"
+patches-source = "MorpheApp/morphe-patches"
+apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
+uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
+
+# anddea
 [YouTube-anddea]
 enabled = false
 app-name = "YouTube"
@@ -35,36 +64,6 @@ uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
 archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.apps.youtube.music"
 excluded-patches = "'Translations for YouTube Music'"
 
-[YouTube-Morphe]
-app-name = "YouTube"
-rv-brand = "Morphe"
-arch = "arm64-v8a"
-cli-source = "MorpheApp/morphe-cli"
-cli-version = "dev"
-patches-source = "MorpheApp/morphe-patches"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
-uptodown-dlurl = "https://youtube.en.uptodown.com/android"
-
-[YTMusic-Morphe]
-app-name = "YT Music"
-rv-brand = "Morphe"
-arch = "arm64-v8a"
-cli-source = "MorpheApp/morphe-cli"
-cli-version = "dev"
-patches-source = "MorpheApp/morphe-patches"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
-uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
-
-[Spotify]
-enabled = false
-app-name = "Spotify"
-# arch = "arm64-v8a"
-rv-brand = "anddea"
-patches-source = "anddea/revanced-patches"
-integrations-source = "anddea/revanced-integrations"
-uptodown-dlurl = "https://spotify.en.uptodown.com/android"
-archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.spotify.music"
-
 [Reddit-anddea]
 enabled = false
 app-name = "Reddit"
@@ -76,17 +75,17 @@ patches-source = "anddea/revanced-patches"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
 uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
 
-[Reddit-Morphe]
-app-name = "Reddit"
-apkmirror-dpi = "nodpi anydpi 120-640dpi"
-arch = "arm64-v8a"
-rv-brand = "Morphe"
-cli-source = "MorpheApp/morphe-cli"
-cli-version = "dev"
-patches-source = "MorpheApp/morphe-patches"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
-uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
+[Spotify]
+enabled = false
+app-name = "Spotify"
+# arch = "arm64-v8a"
+rv-brand = "anddea"
+patches-source = "anddea/revanced-patches"
+integrations-source = "anddea/revanced-integrations"
+uptodown-dlurl = "https://spotify.en.uptodown.com/android"
+archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.spotify.music"
 
+# Regular Revanced
 [GooglePhotos]
 app-name = "GPhotos"
 arch = "arm64-v8a"

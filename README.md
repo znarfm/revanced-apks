@@ -1,8 +1,8 @@
-# ReVanced Magisk Module
+# Revanced APKs 
 
-[![CI](https://github.com/znarfm/revanced-apks/actions/workflows/ci.yml/badge.svg?event=schedule)](https://github.com/znarfm/revanced-apks/actions/workflows/ci.yml) [![GitHub tag](https://img.shields.io/github/tag/znarfm/revanced-apks?include_prereleases=&sort=semver&color=purple)](https://github.com/znarfm/revanced-apks/releases/) [![License](https://img.shields.io/badge/License-MIT-purple)](#license)
+[![CI](https://github.com/znarfm/revanced-apks/actions/workflows/ci.yml/badge.svg?event=schedule)](https://github.com/znarfm/revanced-apks/actions/workflows/ci.yml) [![GitHub tag](https://img.shields.io/github/tag/znarfm/revanced-apks?include_prereleases=&sort=semver&color=purple)](https://github.com/znarfm/revanced-apks/releases/)
 
-An extensive ReVanced builder that creates up-to-date Magisk modules and non-root APKs from
+An extensive ReVanced builder that creates up-to-date Magisk modules and non-root APKs from.
 
 **Note:** If you're using Magisk modules, use [zygisk-detach](https://github.com/j-hc/zygisk-detach) to detach YouTube and YT Music from the Play Store to avoid conflicts.
 

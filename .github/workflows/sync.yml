@@ -1,0 +1,81 @@
+name: Sync with Upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Register the "ours" merge driver so .gitattributes merge=ours rules are honoured
+          git config merge.ours.driver true
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/j-hc/revanced-magisk-module.git
+
+      - name: Fetch upstream
+        # Use --no-tags to avoid conflicts with any upstream tag named "main"
+        run: git fetch upstream --no-tags
+
+      - name: Check for new upstream commits
+        id: upstream_check
+        run: |
+          UPSTREAM_SHA=$(git rev-parse upstream/main)
+          if git merge-base --is-ancestor "$UPSTREAM_SHA" HEAD; then
+            echo "No new upstream commits."
+            echo "HAS_CHANGES=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "HAS_CHANGES=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge upstream main
+        if: steps.upstream_check.outputs.HAS_CHANGES == 'true'
+        id: merge
+        run: |
+          if ! git merge upstream/main --allow-unrelated-histories \
+               -m "chore: sync with upstream j-hc/revanced-magisk-module"; then
+            echo "MERGE_CONFLICT=true" >> "$GITHUB_OUTPUT"
+            git merge --abort
+          else
+            echo "MERGE_CONFLICT=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push changes
+        if: >
+          steps.upstream_check.outputs.HAS_CHANGES == 'true' &&
+          steps.merge.outputs.MERGE_CONFLICT == 'false'
+        run: git push origin HEAD:main
+
+      - name: Open PR on merge conflict
+        if: steps.merge.outputs.MERGE_CONFLICT == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="sync/upstream-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+          git merge upstream/main --allow-unrelated-histories \
+            -m "chore: sync with upstream j-hc/revanced-magisk-module" || true
+          # Stage everything except fully unresolved files so the PR is reviewable
+          git add -A
+          git commit -m "chore: sync with upstream (conflicts need resolution)" || true
+          git push origin "$BRANCH"
+          gh pr create \
+            --title "chore: sync with upstream (merge conflicts)" \
+            --body "Automatic sync with [j-hc/revanced-magisk-module](https://github.com/j-hc/revanced-magisk-module) encountered merge conflicts. Please resolve them and merge this PR." \
+            --base main \
+            --head "$BRANCH"

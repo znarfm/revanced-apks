@@ -3,3 +3,6 @@ README.md merge=ours
 
 # Keep my config file during merges
 config.toml merge=ours
+
+# Keep our sync workflow during merges (upstream does not ship this file)
+.github/workflows/sync.yml merge=ours

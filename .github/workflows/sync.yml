@@ -57,20 +57,6 @@ jobs:
             echo "MERGE_CONFLICT=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Restore local sync.yml after merge
-        # Upstream does not ship .github/workflows/sync.yml, but if it ever
-        # does (or if merge=ours in .gitattributes is bypassed for any reason),
-        # this step guarantees we always keep OUR version of the workflow.
-        # ORIG_HEAD is set by "git merge" to the pre-merge commit, so it
-        # always refers to our local version regardless of merge strategy.
-        if: steps.merge.outputs.MERGE_CONFLICT == 'false' && steps.upstream_check.outputs.HAS_CHANGES == 'true'
-        run: |
-          git checkout ORIG_HEAD -- .github/workflows/sync.yml
-          # Amend only if the index changed (i.e. the file was altered by the merge)
-          if ! git diff --cached --quiet; then
-            git commit --amend --no-edit
-          fi
-
       - name: Push changes
         if: >
           steps.upstream_check.outputs.HAS_CHANGES == 'true' &&
@@ -86,11 +72,6 @@ jobs:
           git checkout -b "$BRANCH"
           git merge upstream/main --allow-unrelated-histories \
             -m "chore: sync with upstream j-hc/revanced-magisk-module" || true
-          # Always restore our sync.yml – upstream must not overwrite it.
-          # ORIG_HEAD is set by "git merge" to the pre-merge commit (our local
-          # version), so this always recovers the correct file even if
-          # merge=ours was somehow bypassed.
-          git checkout ORIG_HEAD -- .github/workflows/sync.yml 2>/dev/null || true
           # Stage everything except fully unresolved files so the PR is reviewable
           git add -A
           git commit -m "chore: sync with upstream (conflicts need resolution)" || true

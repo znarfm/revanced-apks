@@ -3,7 +3,7 @@ name: Sync with Upstream
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "0 11 * * *"
 
 jobs:
   sync:
@@ -36,6 +36,8 @@ jobs:
         id: upstream_check
         run: |
           UPSTREAM_SHA=$(git rev-parse upstream/main)
+          # --is-ancestor A B returns 0 when A is already reachable from B,
+          # meaning HEAD already contains the upstream tip → nothing to do.
           if git merge-base --is-ancestor "$UPSTREAM_SHA" HEAD; then
             echo "No new upstream commits."
             echo "HAS_CHANGES=false" >> "$GITHUB_OUTPUT"

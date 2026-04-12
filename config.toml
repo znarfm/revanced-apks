@@ -21,8 +21,7 @@ archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.y
 # Do not change icon and app name
 excluded-patches = "'Custom branding'"
 # 'Hide Shorts components' self explanatory
-# lightThemeBackgroundColor set to Monet/Material You
-patcher-args = "-e 'Hide Shorts components' -OhideShortsAppShortcut=true -OhideShortsWidget=true -e 'Theme' -OlightThemeBackgroundColor=@android:color/system_neutral1_50"
+patcher-args = "-e 'Hide Shorts components' -OhideShortsAppShortcut=true -OhideShortsWidget=true"
 
 [YTMusic-Morphe]
 app-name = "YT Music"

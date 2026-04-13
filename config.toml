@@ -1,10 +1,7 @@
 enable-magisk-update = false # set this to false if you do not want to receive updates for the module in magisk app
 
-# commented to use nproc instead
-# parallel-jobs = 4
-
 # add 'enabled = false' for not patching a specific app or remove it from the config
-# see https://github.com/j-hc/revanced-magisk-module/blob/main/CONFIG.md for more detailed explanations
+# see https://github.com/znarfm/revanced-apks/blob/main/CONFIG.md for more detailed explanations
 
 # you can use rvmm-config-gen to generate a config
 
@@ -13,21 +10,18 @@ enable-magisk-update = false # set this to false if you do not want to receive u
 app-name = "YouTube"
 rv-brand = "Morphe"
 arch = "arm64-v8a"
-cli-source = "MorpheApp/morphe-cli"
 patches-source = "MorpheApp/morphe-patches"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
 uptodown-dlurl = "https://youtube.en.uptodown.com/android"
 archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.youtube"
 # Do not change icon and app name
 excluded-patches = "'Custom branding'"
-# 'Hide Shorts components' self explanatory
 patcher-args = "-e 'Hide Shorts components' -OhideShortsAppShortcut=true -OhideShortsWidget=true"
 
 [YTMusic-Morphe]
 app-name = "YT Music"
 rv-brand = "Morphe"
 arch = "arm64-v8a"
-cli-source = "MorpheApp/morphe-cli"
 patches-source = "MorpheApp/morphe-patches"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
 uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
@@ -40,77 +34,21 @@ app-name = "Reddit"
 apkmirror-dpi = "nodpi anydpi 120-640dpi"
 arch = "arm64-v8a"
 rv-brand = "Morphe"
-cli-source = "MorpheApp/morphe-cli"
 patches-source = "MorpheApp/morphe-patches"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
 uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
 
-# anddea
-[YouTube-anddea]
-enabled = false
-app-name = "YouTube"
-rv-brand = "anddea"
-arch = "arm64-v8a"
-patches-source = "anddea/revanced-patches"
-integrations-source = "anddea/revanced-integrations"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
-uptodown-dlurl = "https://youtube.en.uptodown.com/android"
-archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.youtube"
-
-[Music-anddea]
-enabled = false
-app-name = "YT Music"
-rv-brand = "anddea"
-version = "8.25.54"
-arch = "arm64-v8a"
-patches-source = "anddea/revanced-patches"
-integrations-source = "anddea/revanced-integrations"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
-uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
-archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.apps.youtube.music"
-excluded-patches = "'Translations for YouTube Music'"
-
-[Reddit-anddea]
-enabled = false
-app-name = "Reddit"
-version = "2025.12.1"
-apkmirror-dpi = "120-640dpi"
-# arch = "arm64-v8a"
-rv-brand = "anddea"
-patches-source = "anddea/revanced-patches"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/redditinc/reddit/"
-uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
-
-# Regular Revanced
+# De-Revanced (Revanced patches ported to Morphe)
 [GooglePhotos]
 app-name = "GPhotos"
 arch = "arm64-v8a"
+patches-source = "RookieEnough/De-ReVanced"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/photos/"
 uptodown-dlurl = "https://google-photos.en.uptodown.com/android"
 archive-dlurl = "https://archive.org/download/jhc-apks/apks/com.google.android.apps.photos"
 
-[Messenger]
-enabled = false
-arch = "arm64-v8a"
-# apkmirror-dlurl = "https://www.apkmirror.com/apk/facebook-2/messenger/"
-uptodown-dlurl = "https://facebook-messenger.en.uptodown.com/android"
-included-patches = "'Remove screenshot restriction' 'Prevent screenshot detection' 'Remove screen capture restriction'"
-excluded-patches = "'Remove Meta AI'"
-
-[Facebook]
-enabled = false
-arch = "arm64-v8a"
-# apkmirror-dlurl = "https://www.apkmirror.com/apk/facebook-2/facebook/"
-uptodown-dlurl = "https://facebook.en.uptodown.com/android"
-included-patches = "'Remove screenshot restriction' 'Prevent screenshot detection' 'Remove screen capture restriction'"
-
-[Lightroom]
-enabled = false
-arch = "arm64-v8a"
-# apkmirror-dlurl = "https://www.apkmirror.com/apk/adobe/lightroom/"
-uptodown-dlurl = "https://adobe-lightroom-mobile.en.uptodown.com/android"
-
 [Strava]
 arch = "arm64-v8a"
+patches-source = "RookieEnough/De-ReVanced"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/strava-inc/"
 uptodown-dlurl = "https://strava.en.uptodown.com/android/download"

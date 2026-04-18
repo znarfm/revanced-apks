@@ -6,3 +6,6 @@ config.toml merge=ours
 
 # Keep our sync workflow during merges (upstream does not ship this file)
 .github/workflows/sync.yml merge=ours
+
+# Keep my GEMINI.md during merges
+GEMINI.md merge=ours

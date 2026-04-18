@@ -216,16 +216,19 @@ _req() {
 		if [ -f "$op" ]; then return; fi
 		dlp="$(dirname "$op")/tmp.$(basename "$op")"
 		if [ -f "$dlp" ]; then
-			while [ -f "$dlp" ]; do sleep 1; done
-			return
+			pr "Waiting for other process to download $(basename "$op")..."
+			local timeout=600
+			while [ -f "$dlp" ] && ((timeout-- > 0)); do sleep 1; done
+			if [ -f "$op" ]; then return 0; fi
+			if [ -f "$dlp" ]; then epr "Timeout waiting for $dlp"; return 1; fi
 		fi
 	fi
-	if ! curl -L -c "$TEMP_DIR/cookie.txt" -b "$TEMP_DIR/cookie.txt" --connect-timeout 10 --retry 1 --fail -s -S "$@" "$ip" -o "$dlp"; then
+	if ! curl -L -c "$TEMP_DIR/cookie.txt" -b "$TEMP_DIR/cookie.txt" --connect-timeout 10 --max-time 600 --retry 1 --fail -s -S "$@" "$ip" -o "$dlp"; then
 		epr "Request failed: $ip"
 		rm -f "$dlp"
 		return 1
 	fi
-	if [ "$dlp" != - ]; then
+	if [ "$dlp" != - ] && [ -f "$dlp" ]; then
 		mv -f "$dlp" "$op"
 	fi
 }

@@ -19,14 +19,10 @@ RVPATH=/data/adb/rvhc/${MODPATH##*/}.apk
 
 set_perm_recursive "$MODPATH/bin" 0 0 0755 0777
 
-if su -M -c true >/dev/null 2>/dev/null; then
-	alias mm='su -M -c'
-else alias mm='nsenter -t1 -m'; fi
-
-mm grep -F "$PKG_NAME" /proc/mounts | while read -r line; do
+su -M -c grep -F "$PKG_NAME" /proc/mounts | while read -r line; do
 	ui_print "* Un-mount"
 	mp=${line#* } mp=${mp%% *}
-	mm umount -l "${mp%%\\*}"
+	su -M -c umount -l "${mp%%\\*}"
 done
 am force-stop "$PKG_NAME"
 
@@ -60,8 +56,8 @@ if BASEPATH=$(pmex path "$PKG_NAME"); then
 		ui_print "* Created the uninstall script."
 		ui_print ""
 		ui_print "* Reboot and reflash the module!"
-
 		abort
+<<<<<<< HEAD
 	elif [ ! -f "$MODPATH/stock/base.apk" ]; then
 		ui_print "* Stock $PKG_NAME APK was not found"
 		VERSION=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 versionName) VERSION="${VERSION#*=}"
@@ -79,7 +75,26 @@ if BASEPATH=$(pmex path "$PKG_NAME"); then
 	else
 		ui_print "* $PKG_NAME is up-to-date"
 		INS=false
+=======
+>>>>>>> upstream/main
 	fi
+
+	VERSION=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 versionName=) VERSION="${VERSION#*=}"
+	if [ "$VERSION" ] && [ "$VERSION" = "$PKG_VER" ]; then
+		ui_print "* $PKG_NAME is up-to-date ($VERSION)"
+		INS=false
+	elif [ ! -f "$MODPATH/stock/base.apk" ]; then
+		ui_print "ERROR: Version mismatch
+			installed: '$VERSION'
+			module:    '$PKG_VER'"
+		abort
+	fi
+
+	# TODO:
+	# elif "${MODPATH:?}/bin/$ARCH/cmpr" "$BASEPATH/base.apk" "$MODPATH/$PKG_NAME.apk"; then
+	# 	ui_print "* $PKG_NAME is up-to-date"
+	# 	INS=false
+	# fi
 fi
 
 install() {
@@ -92,7 +107,11 @@ install() {
 	settings put global verifier_verify_adb_installs 0
 	settings put global package_verifier_enable 0
 
+<<<<<<< HEAD
 	SZ=$(stat -c "%s" "$MODPATH/stock/base.apk" | awk '{sum += $0} END {print sum}')
+=======
+	SZ=$(stat -c "%s" "$MODPATH"/stock/*.apk | awk '{sum += $0} END {print sum}')
+>>>>>>> upstream/main
 	for IT in 1 2; do
 		ui_print "* Updating $PKG_NAME to $PKG_VER"
 		if ! SES=$(pmex install-create --user 0 -i com.android.vending -r -S "$SZ"); then
@@ -163,7 +182,7 @@ mkdir -p "/data/adb/rvhc"
 RVPATH=/data/adb/rvhc/${MODPATH##*/}.apk
 mv -f "$MODPATH/base.apk" "$RVPATH"
 
-if ! op=$(mm mount -o bind "$RVPATH" "$BASEPATH/base.apk" 2>&1); then
+if ! op=$(su -M -c mount -o bind "$RVPATH" "$BASEPATH/base.apk" 2>&1); then
 	ui_print "ERROR: Mount failed!"
 	ui_print "$op"
 fi

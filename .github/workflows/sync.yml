@@ -77,6 +77,7 @@ jobs:
           git commit -m "chore: sync with upstream (conflicts need resolution)" || true
           git push origin "$BRANCH"
           gh pr create \
+            --repo "znarfm/revanced-apks" \
             --title "chore: sync with upstream (merge conflicts)" \
             --body "Automatic sync with [j-hc/revanced-magisk-module](https://github.com/j-hc/revanced-magisk-module) encountered merge conflicts. Please resolve them and merge this PR." \
             --base main \

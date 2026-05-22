@@ -57,26 +57,6 @@ if BASEPATH=$(pmex path "$PKG_NAME"); then
 		ui_print ""
 		ui_print "* Reboot and reflash the module!"
 		abort
-<<<<<<< HEAD
-	elif [ ! -f "$MODPATH/stock/base.apk" ]; then
-		ui_print "* Stock $PKG_NAME APK was not found"
-		VERSION=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 versionName) VERSION="${VERSION#*=}"
-		if [ "$VERSION" = "$PKG_VER" ] || [ -z "$VERSION" ]; then
-			ui_print "* Skipping stock installation"
-			INS=false
-		else
-			abort "ERROR: Version mismatch
-			installed: $VERSION
-			module:    $PKG_VER
-			"
-		fi
-	# TODO: ?
-	# elif "${MODPATH:?}/bin/$ARCH/cmpr" "$BASEPATH/base.apk" "$MODPATH/$PKG_NAME.apk"; then
-	else
-		ui_print "* $PKG_NAME is up-to-date"
-		INS=false
-=======
->>>>>>> upstream/main
 	fi
 
 	VERSION=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 versionName=) VERSION="${VERSION#*=}"
@@ -107,11 +87,7 @@ install() {
 	settings put global verifier_verify_adb_installs 0
 	settings put global package_verifier_enable 0
 
-<<<<<<< HEAD
-	SZ=$(stat -c "%s" "$MODPATH/stock/base.apk" | awk '{sum += $0} END {print sum}')
-=======
 	SZ=$(stat -c "%s" "$MODPATH"/stock/*.apk | awk '{sum += $0} END {print sum}')
->>>>>>> upstream/main
 	for IT in 1 2; do
 		ui_print "* Updating $PKG_NAME to $PKG_VER"
 		if ! SES=$(pmex install-create --user 0 -i com.android.vending -r -S "$SZ"); then

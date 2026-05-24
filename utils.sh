@@ -224,7 +224,6 @@ _req() {
 	fi
 	if ! curl -L -c "$TEMP_DIR/cookie.txt" -b "$TEMP_DIR/cookie.txt" --connect-timeout 10 --retry 1 --fail -s -S "$@" "$ip" -o "$dlp"; then
 		epr "Request failed: $ip"
-		rm -f "$dlp"
 		return 1
 	fi
 	if [ "$dlp" != - ]; then
@@ -588,23 +587,6 @@ build_rv() {
 	[ "${args[exclusive_patches]}" = true ] && p_patcher_args+=("--exclusive")
 
 	local tried_dl=()
-<<<<<<< HEAD
-	for dl_p in "${DL_SRCS[@]}"; do
-		if [ -z "${args[${dl_p}_dlurl]}" ]; then continue; fi
-		if [ "${args[pkg_name]}" ]; then
-			pkg_name="${args[pkg_name]}"
-			break
-		fi
-		if ! get_${dl_p}_resp "${args[${dl_p}_dlurl]}" || ! pkg_name=$(get_"${dl_p}"_pkg_name); then
-			args[${dl_p}_dlurl]=""
-			epr "ERROR: Could not find ${table} in ${dl_p}"
-			continue
-		fi
-		tried_dl+=("$dl_p")
-		dl_from=$dl_p
-		break
-	done
-=======
 	if [ "${args[pkg_name]}" ]; then
 		pkg_name="${args[pkg_name]}"
 	else
@@ -621,7 +603,6 @@ build_rv() {
 		done
 	fi
 
->>>>>>> upstream/main
 	if [ -z "$pkg_name" ]; then
 		epr "empty pkg name, not building ${table}."
 		return 0
@@ -792,13 +773,8 @@ build_rv() {
 				cp -f "$stock_apk" "${base_template}/stock/base.apk"
 			elif [ "${args[include_stock]}" = "split" ]; then
 				if [ ! -f "${stock_apk}.apkm" ]; then
-<<<<<<< HEAD
-					epr "Cannot include as 'split' because stock apk of $table_name is not bundle"
-					continue
-=======
 					epr "Cannot include as 'split' because stock apk of $table_name is not a bundle"
 					return 0
->>>>>>> upstream/main
 				fi
 				if [ "$arch" = "arm64-v8a" ]; then
 					unzip -j "${stock_apk}.apkm" '*.apk' -x '*x86_64.apk' -x '*x86.apk' -x '*armeabi_v7a.apk' -d "${base_template}/stock/" >/dev/null 2>&1
